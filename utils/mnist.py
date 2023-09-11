@@ -3,13 +3,14 @@
 ########################
 
 from keras.datasets import mnist
+from keras.datasets import fashion_mnist
 from keras.models import Sequential, model_from_json
 from keras.layers import Dense, Dropout, Activation, Flatten, Input
 from keras.layers import Conv2D, MaxPooling2D, BatchNormalization
 from keras.preprocessing.image import ImageDataGenerator
 from keras.utils import np_utils
 
-from .fmnist import load_fmnist
+# from .fmnist import load_fmnist
 import global_vars as gv
 
 import argparse
@@ -25,8 +26,9 @@ def data_mnist(one_hot=True):
         (X_train, y_train), (X_test, y_test) = mnist.load_data()
 
     elif gv.args.dataset == 'fMNIST':
-        X_train, y_train = load_fmnist('/home/data/', kind='train')
-        X_test, y_test = load_fmnist('/home/data/', kind='t10k')
+        (X_train, y_train), (X_test, y_test) = fashion_mnist.load_data()
+        # X_train, y_train = load_fmnist('/home/data/', kind='train')
+        # X_test, y_test = load_fmnist('/home/data/', kind='t10k')
 
 
     X_train = X_train.reshape(X_train.shape[0],
